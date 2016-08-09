@@ -1,6 +1,24 @@
 name := "datapackage"
 
 scalaVersion := "2.11.8"
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-encoding", "UTF-8",
+  "-feature",
+  "-language:existentials",
+  "-language:experimental.macros",
+  "-language:higherKinds",
+  "-language:implicitConversions",
+  "-unchecked",
+  "-Xfatal-warnings",
+  "-Xfuture",
+  "-Xlint",
+  "-Yno-adapted-args",
+  "-Ywarn-numeric-widen",
+  "-Ywarn-unused-import",
+  "-Ywarn-value-discard"
+)
+scalacOptions in (Compile, console) -= "-Ywarn-unused-import"
 
 val circeVersion = "0.4.1"
 val refinedVersion = "0.5.0"
