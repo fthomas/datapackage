@@ -1,7 +1,7 @@
 package eu.timepit.datapackage
 
 import io.circe.{Decoder, Encoder}
-import io.circe.generic.semiauto.{deriveDecoder, deriveEncoder}
+import io.circe.generic.semiauto._
 
 final case class ResourceInformation()
 

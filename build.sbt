@@ -35,6 +35,8 @@ libraryDependencies ++= Seq(
 initialCommands += """
   import eu.timepit.datapackage._
   import eu.timepit.refined.auto._
+  import io.circe.{Decoder, Encoder}
+  import io.circe.syntax._
 """
 
 reformatOnCompileSettings
