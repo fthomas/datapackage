@@ -25,7 +25,7 @@ object License {
 
   implicit val encoderLicense: Encoder[License] =
     Encoder.instance {
-      case Str(value) => value.asJson
+      case Str(tpe) => tpe.asJson
       case Obj(tpe, url) =>
         Json.obj(keyTpe -> tpe.asJson, keyUrl -> url.asJson)
     }
