@@ -24,9 +24,14 @@ class WorldCities extends Properties("examples.world-cities") {
     val descriptor = Descriptor(
       name = "world-cities",
       resources = List(resource),
+      license = Some(
+        License.Obj("ODC-PDDL",
+                    "http://opendatacommons.org/licenses/pddl/1.0/")),
       title = Some("Major cities of the world"),
       description =
-        Some("List of the world's major cities (above 15,000 inhabitants)"))
+        Some("List of the world's major cities (above 15,000 inhabitants)"),
+      homepage = Some("http://github.com/datasets/world-cities"),
+      keywords = Some(List("geodata", "city")))
 
     parser.decode[Descriptor](datapackage) ?= Xor.Right(descriptor)
   }

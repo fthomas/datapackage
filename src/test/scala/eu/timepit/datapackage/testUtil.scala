@@ -8,6 +8,15 @@ import org.scalacheck.Prop._
 import org.scalacheck.{Arbitrary, Gen, Prop}
 
 object testUtil {
+  implicit val arbitraryLicense: Arbitrary[License] = {
+    val str = Gen.alphaStr.map(License.Str.apply)
+    val obj = for {
+      tpe <- Arbitrary.arbitrary[String]
+      url <- Arbitrary.arbitrary[String]
+    } yield License.Obj(tpe, url)
+    Arbitrary(Gen.oneOf(str, obj))
+  }
+
   implicit val arbitraryResourceLocation: Arbitrary[ResourceLocation] = {
     val url = Gen.alphaStr.map(Url.apply)
     val path = Gen.alphaStr.map(Path.apply)
@@ -41,13 +50,23 @@ object testUtil {
     val gen = for {
       name <- Gen.alphaStr.map(_.toLowerCase) // Arbitrary.arbitrary[Descriptor.NameType]
       resources <- Arbitrary.arbitrary[List[ResourceInformation]]
+      license <- Arbitrary.arbitrary[Option[License]]
       title <- Arbitrary.arbitrary[Option[String]]
       description <- Arbitrary.arbitrary[Option[String]]
+      homepage <- Arbitrary.arbitrary[Option[String]]
+      version <- Arbitrary.arbitrary[Option[String]]
+      keywords <- Arbitrary.arbitrary[Option[List[String]]]
+      image <- Arbitrary.arbitrary[Option[String]]
     } yield
       Descriptor(name = Refined.unsafeApply(name),
                  resources = resources,
+                 license = license,
                  title = title,
-                 description = description)
+                 description = description,
+                 homepage = homepage,
+                 version = version,
+                 keywords = keywords,
+                 image = image)
     Arbitrary(gen)
   }
 

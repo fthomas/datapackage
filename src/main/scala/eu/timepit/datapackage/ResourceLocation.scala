@@ -1,9 +1,9 @@
 package eu.timepit.datapackage
 
-import cats.data.Xor
 import eu.timepit.datapackage.util.JsonKey
 import eu.timepit.datapackage.util.JsonKey.keyOf
 import io.circe._
+import io.circe.syntax._
 
 sealed trait ResourceLocation extends Product with Serializable
 
@@ -17,14 +17,13 @@ object ResourceLocation {
       def url = c.downField(keyOf[Url]).as[String].map(Url.apply)
       def path = c.downField(keyOf[Path]).as[String].map(Path.apply)
       def data = c.downField(keyOf[Data]).as[Unit].map(_ => Data())
-      def fail = Xor.Left(DecodingFailure("ResourceLocation", c.history))
-      url.orElse(path).orElse(data).orElse(fail)
+      url.orElse(path).orElse(data)
     }
 
   implicit val encoderResourceLocation: Encoder[ResourceLocation] =
     Encoder.instance {
-      case Url(value) => Json.obj(keyOf[Url] -> Json.fromString(value))
-      case Path(value) => Json.obj(keyOf[Path] -> Json.fromString(value))
+      case Url(value) => Json.obj(keyOf[Url] -> value.asJson)
+      case Path(value) => Json.obj(keyOf[Path] -> value.asJson)
       case Data() => Json.obj(keyOf[Data] -> Json.Null)
     }
 

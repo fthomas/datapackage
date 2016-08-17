@@ -13,16 +13,16 @@ import shapeless.::
 
 final case class Descriptor(name: NameType,
                             resources: List[ResourceInformation],
-                            /*license: Option[Any] = None,*/
+                            license: Option[License] = None,
                             title: Option[String] = None,
-                            description: Option[String] = None /*
-                            homepage: Option[Any] = None,
-                            version: Option[Any] = None,
+                            description: Option[String] = None,
+                            homepage: Option[String] = None,
+                            version: Option[String] = None, /*
                             sources: List[Any] = List.empty,
                             author: Option[Any] = None,
-                            contributors: List[Any] = List.empty,
-                            keywords: List[String] = List.empty,
-                            image: Option[String] = None,
+                            contributors: List[Any] = List.empty*/
+                            keywords: Option[List[String]] = None,
+                            image: Option[String] = None /*
                             dataDependencies: Option[Any] = None,
                             schemas: Option[Any] = None*/
 )
