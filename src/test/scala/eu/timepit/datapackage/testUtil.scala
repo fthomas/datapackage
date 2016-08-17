@@ -18,7 +18,14 @@ object testUtil {
   implicit val arbitraryResourceMetadata: Arbitrary[ResourceMetadata] = {
     val gen = for {
       name <- Arbitrary.arbitrary[Option[String]]
-    } yield ResourceMetadata(name)
+      title <- Arbitrary.arbitrary[Option[String]]
+      description <- Arbitrary.arbitrary[Option[String]]
+      format <- Arbitrary.arbitrary[Option[String]]
+    } yield
+      ResourceMetadata(name = name,
+                       title = title,
+                       description = description,
+                       format = format)
     Arbitrary(gen)
   }
 
