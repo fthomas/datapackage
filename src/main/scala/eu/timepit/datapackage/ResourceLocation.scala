@@ -12,22 +12,16 @@ object ResourceLocation {
   final case class Path(value: String) extends ResourceLocation
   final case class Data() extends ResourceLocation
 
-  implicit val resourceLocationDecoder: Decoder[ResourceLocation] =
+  implicit val decoderResourceLocation: Decoder[ResourceLocation] =
     Decoder.instance { c =>
-      def url =
-        c.downField(keyOf[Url]).cursor.map(_.as[String].map(Url.apply))
-      def path =
-        c.downField(keyOf[Path]).cursor.map(_.as[String].map(Path.apply))
-      def data =
-        c.downField(keyOf[Data]).cursor.map(_ => Xor.Right(Data()))
-
-      url
-        .orElse(path)
-        .orElse(data)
-        .getOrElse(Xor.Left(DecodingFailure("ResourceLocation", c.history)))
+      def url = c.downField(keyOf[Url]).as[String].map(Url.apply)
+      def path = c.downField(keyOf[Path]).as[String].map(Path.apply)
+      def data = c.downField(keyOf[Data]).as[Unit].map(_ => Data())
+      def fail = Xor.Left(DecodingFailure("ResourceLocation", c.history))
+      url.orElse(path).orElse(data).orElse(fail)
     }
 
-  implicit val resourceLocationEncoder: Encoder[ResourceLocation] =
+  implicit val encoderResourceLocation: Encoder[ResourceLocation] =
     Encoder.instance {
       case Url(value) => Json.obj(keyOf[Url] -> Json.fromString(value))
       case Path(value) => Json.obj(keyOf[Path] -> Json.fromString(value))

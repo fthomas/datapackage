@@ -29,7 +29,7 @@ final case class Descriptor(name: NameType,
 
 object Descriptor {
   type NameType = String Refined Forall[
-      AnyOf[LowerCaseLatinLetter :: Digit :: DotDashUnderscore]]
+    AnyOf[LowerCaseLatinLetter :: Digit :: DotDashUnderscore]]
 
   implicit val descriptorDecoder: Decoder[Descriptor] = deriveDecoder
 
