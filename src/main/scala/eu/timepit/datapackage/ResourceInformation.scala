@@ -3,8 +3,6 @@ package eu.timepit.datapackage
 import io.circe.generic.semiauto._
 import io.circe.{Decoder, Encoder, Json}
 
-final case class ResourceMetadata()
-
 final case class ResourceInformation(location: ResourceLocation,
                                      name: Option[String] = None)
 
