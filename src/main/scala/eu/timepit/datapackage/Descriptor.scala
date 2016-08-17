@@ -14,8 +14,8 @@ import shapeless.::
 final case class Descriptor(name: NameType,
                             resources: List[ResourceInformation],
                             /*license: Option[Any] = None,*/
-                            title: Option[String] = None /*
-                            description: Option[String] = None,
+                            title: Option[String] = None,
+                            description: Option[String] = None /*
                             homepage: Option[Any] = None,
                             version: Option[Any] = None,
                             sources: List[Any] = List.empty,

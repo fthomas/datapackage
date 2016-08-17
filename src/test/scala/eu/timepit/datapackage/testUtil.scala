@@ -42,10 +42,12 @@ object testUtil {
       name <- Gen.alphaStr.map(_.toLowerCase) // Arbitrary.arbitrary[Descriptor.NameType]
       resources <- Arbitrary.arbitrary[List[ResourceInformation]]
       title <- Arbitrary.arbitrary[Option[String]]
+      description <- Arbitrary.arbitrary[Option[String]]
     } yield
       Descriptor(name = Refined.unsafeApply(name),
                  resources = resources,
-                 title = title)
+                 title = title,
+                 description = description)
     Arbitrary(gen)
   }
 

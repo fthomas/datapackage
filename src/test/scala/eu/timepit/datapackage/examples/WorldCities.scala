@@ -21,9 +21,12 @@ class WorldCities extends Properties("examples.world-cities") {
       ResourceLocation.Path("data/world-cities.csv"),
       ResourceMetadata(name = Some("world-cities"), format = Some("csv")))
 
-    val descriptor = Descriptor(name = "world-cities",
-                                resources = List(resource),
-                                title = Some("Major cities of the world"))
+    val descriptor = Descriptor(
+      name = "world-cities",
+      resources = List(resource),
+      title = Some("Major cities of the world"),
+      description =
+        Some("List of the world's major cities (above 15,000 inhabitants)"))
 
     parser.decode[Descriptor](datapackage) ?= Xor.Right(descriptor)
   }
