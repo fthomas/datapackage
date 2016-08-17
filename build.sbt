@@ -25,6 +25,7 @@ val refinedVersion = "0.5.0"
 
 libraryDependencies ++= Seq(
   "eu.timepit" %% "refined" % refinedVersion,
+  "eu.timepit" %% "refined-scalacheck" % refinedVersion,
   "io.circe" %% "circe-core" % circeVersion,
   "io.circe" %% "circe-generic" % circeVersion,
   "io.circe" %% "circe-parser" % circeVersion,

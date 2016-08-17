@@ -1,26 +1,20 @@
 package eu.timepit.datapackage
 
-import io.circe.generic.semiauto._
-import io.circe.{Decoder, Encoder, Json}
+import io.circe.syntax._
+import io.circe.{Decoder, Encoder}
 
 final case class ResourceInformation(location: ResourceLocation,
-                                     name: Option[String] = None)
+                                     metadata: ResourceMetadata)
 
 object ResourceInformation {
   implicit val resourceInformationDecoder: Decoder[ResourceInformation] =
-    Decoder.instance { c =>
-      for {
-        loc <- Decoder[ResourceLocation].apply(c)
-        name <- c.downField("name").as[Option[String]]
-      } yield ResourceInformation(loc, name)
-    }
+    for {
+      location <- Decoder[ResourceLocation]
+      metadata <- Decoder[ResourceMetadata]
+    } yield ResourceInformation(location, metadata)
 
   implicit val resourceInformationEncoder: Encoder[ResourceInformation] =
-    deriveEncoder[ResourceInformation].mapJson { x =>
-      val o = x.asObject.get
-      val loc = o.apply("location").get
-      val o2 = o.remove("location")
-
-      Json.fromJsonObject(o2).deepMerge(loc)
+    Encoder.instance { res =>
+      res.metadata.asJson.deepMerge(res.location.asJson)
     }
 }
