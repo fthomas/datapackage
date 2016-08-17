@@ -41,7 +41,11 @@ object testUtil {
     val gen = for {
       name <- Gen.alphaStr.map(_.toLowerCase) // Arbitrary.arbitrary[Descriptor.NameType]
       resources <- Arbitrary.arbitrary[List[ResourceInformation]]
-    } yield Descriptor(Refined.unsafeApply(name), resources)
+      title <- Arbitrary.arbitrary[Option[String]]
+    } yield
+      Descriptor(name = Refined.unsafeApply(name),
+                 resources = resources,
+                 title = title)
     Arbitrary(gen)
   }
 
