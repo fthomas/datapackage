@@ -3,7 +3,7 @@ package eu.timepit.datapackage
 import cats.data.Xor
 import eu.timepit.datapackage.ResourceLocation.{Data, Path, Url}
 import eu.timepit.refined.api.Refined
-import io.circe.{Decoder, Encoder}
+import io.circe.{Decoder, Encoder, Json}
 import org.scalacheck.Prop._
 import org.scalacheck.{Arbitrary, Gen, Prop}
 
@@ -44,4 +44,8 @@ object testUtil {
       val decoded = Decoder[A].decodeJson(json)
       decoded ?= Xor.Right(a)
     }
+
+  def jsonDecodingError[A: Decoder]: Prop = secure {
+    Decoder[A].decodeJson(Json.Null).isLeft
+  }
 }

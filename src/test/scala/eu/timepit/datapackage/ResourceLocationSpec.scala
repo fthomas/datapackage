@@ -6,4 +6,5 @@ import org.scalacheck.Properties
 class ResourceLocationSpec
     extends Properties(classOf[ResourceLocation].getSimpleName) {
   property("JSON round-trip") = jsonRoundTrip[ResourceLocation]
+  property("JSON decoding error") = jsonDecodingError[ResourceLocation]
 }
