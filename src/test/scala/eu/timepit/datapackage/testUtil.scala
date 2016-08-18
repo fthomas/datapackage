@@ -6,6 +6,7 @@ import eu.timepit.refined.api.Refined
 import io.circe.{Decoder, Encoder, Json}
 import org.scalacheck.Prop._
 import org.scalacheck.{Arbitrary, Gen, Prop}
+import scala.reflect.ClassTag
 
 object testUtil {
   implicit val arbitraryLicense: Arbitrary[License] = {
@@ -80,4 +81,7 @@ object testUtil {
   def jsonDecodingError[A: Decoder]: Prop = secure {
     Decoder[A].decodeJson(Json.Null).isLeft
   }
+
+  def nameOf[T](implicit ct: ClassTag[T]): String =
+    ct.runtimeClass.getSimpleName
 }
