@@ -17,9 +17,11 @@ class WorldCities extends Properties("examples.world-cities") {
   }
 
   property("datapackage.json") = secure {
-    val resource = ResourceInformation(
-      ResourceLocation.Path("data/world-cities.csv"),
-      ResourceMetadata(name = Some("world-cities"), format = Some("csv")))
+    val resource =
+      ResourceInformation(ResourceLocation.Path("data/world-cities.csv"),
+                          ResourceMetadata(name = Some("world-cities"),
+                                           format = Some("csv"),
+                                           mediatype = Some("text/csv")))
 
     val descriptor = Descriptor(
       name = "world-cities",

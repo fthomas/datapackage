@@ -31,11 +31,15 @@ object testUtil {
       title <- Arbitrary.arbitrary[Option[String]]
       description <- Arbitrary.arbitrary[Option[String]]
       format <- Arbitrary.arbitrary[Option[String]]
+      mediatype <- Gen.alphaStr.map(Some.apply)
+      encoding <- Gen.alphaStr.map(Some.apply)
     } yield
       ResourceMetadata(name = name,
                        title = title,
                        description = description,
-                       format = format)
+                       format = format,
+                       mediatype = mediatype,
+                       encoding = encoding)
     Arbitrary(gen)
   }
 
