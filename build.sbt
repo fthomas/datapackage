@@ -19,9 +19,11 @@ scalacOptions ++= Seq(
   "-Ywarn-value-discard"
 )
 scalacOptions in (Compile, console) -= "-Ywarn-unused-import"
+scalacOptions in (Test, console) -= "-Ywarn-unused-import"
 
 val circeVersion = "0.4.1"
 val refinedVersion = "0.5.0"
+val scalacheckVersion = "1.12.5"
 
 libraryDependencies ++= Seq(
   "eu.timepit" %% "refined" % refinedVersion,
@@ -30,7 +32,7 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-generic" % circeVersion,
   "io.circe" %% "circe-parser" % circeVersion,
   "io.circe" %% "circe-refined" % circeVersion,
-  "org.scalacheck" %% "scalacheck" % "1.12.5" % "test"
+  "org.scalacheck" %% "scalacheck" % scalacheckVersion % "test"
 )
 
 initialCommands += """
@@ -38,6 +40,11 @@ initialCommands += """
   import eu.timepit.refined.auto._
   import io.circe.{Decoder, Encoder}
   import io.circe.syntax._
+"""
+
+initialCommands in Test += """
+  import eu.timepit.datapackage.testUtil._
+  import org.scalacheck.Arbitrary
 """
 
 reformatOnCompileSettings

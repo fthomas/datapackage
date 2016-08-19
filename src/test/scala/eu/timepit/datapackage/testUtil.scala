@@ -2,7 +2,9 @@ package eu.timepit.datapackage
 
 import cats.data.Xor
 import eu.timepit.datapackage.ResourceLocation.{Data, Path, Url}
+import eu.timepit.datapackage.types.Natural
 import eu.timepit.refined.api.Refined
+import eu.timepit.refined.scalacheck.numeric._
 import io.circe.{Decoder, Encoder, Json}
 import org.scalacheck.Prop._
 import org.scalacheck.{Arbitrary, Gen, Prop}
@@ -33,13 +35,15 @@ object testUtil {
       format <- Arbitrary.arbitrary[Option[String]]
       mediatype <- Gen.alphaStr.map(Some.apply)
       encoding <- Gen.alphaStr.map(Some.apply)
+      bytes <- Arbitrary.arbitrary[Option[Natural]]
     } yield
       ResourceMetadata(name = name,
                        title = title,
                        description = description,
                        format = format,
                        mediatype = mediatype,
-                       encoding = encoding)
+                       encoding = encoding,
+                       bytes = bytes)
     Arbitrary(gen)
   }
 
