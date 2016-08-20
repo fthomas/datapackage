@@ -11,6 +11,15 @@ import org.scalacheck.{Arbitrary, Gen, Prop}
 import scala.reflect.ClassTag
 
 object testUtil {
+  implicit val arbitraryHash: Arbitrary[Hash] = {
+    val gen = for {
+      digest <- Gen.alphaStr.filter(_.nonEmpty)
+      algorithm <- Gen.option(Gen.alphaStr.filter(_.nonEmpty))
+    } yield
+      Hash(Refined.unsafeApply(digest), algorithm.map(Refined.unsafeApply))
+    Arbitrary(gen)
+  }
+
   implicit val arbitraryLicense: Arbitrary[License] = {
     val str = Gen.alphaStr.map(License.Str.apply)
     val obj = for {
@@ -36,6 +45,7 @@ object testUtil {
       mediatype <- Gen.alphaStr.map(Some.apply)
       encoding <- Gen.alphaStr.map(Some.apply)
       bytes <- Arbitrary.arbitrary[Option[Natural]]
+      hash <- Arbitrary.arbitrary[Option[Hash]]
     } yield
       ResourceMetadata(name = name,
                        title = title,
@@ -43,7 +53,8 @@ object testUtil {
                        format = format,
                        mediatype = mediatype,
                        encoding = encoding,
-                       bytes = bytes)
+                       bytes = bytes,
+                       hash = hash)
     Arbitrary(gen)
   }
 
