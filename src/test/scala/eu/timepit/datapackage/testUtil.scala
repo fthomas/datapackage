@@ -46,6 +46,7 @@ object testUtil {
       encoding <- Gen.alphaStr.map(Some.apply)
       bytes <- Arbitrary.arbitrary[Option[Natural]]
       hash <- Arbitrary.arbitrary[Option[Hash]]
+      license <- Arbitrary.arbitrary[Option[License]]
     } yield
       ResourceMetadata(name = name,
                        title = title,
@@ -54,7 +55,8 @@ object testUtil {
                        mediatype = mediatype,
                        encoding = encoding,
                        bytes = bytes,
-                       hash = hash)
+                       hash = hash,
+                       license = license)
     Arbitrary(gen)
   }
 

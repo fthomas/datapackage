@@ -12,7 +12,8 @@ final case class ResourceMetadata(name: Option[String] = None, // TODO: refine!
                                   mediatype: Option[String] = None,
                                   encoding: Option[String] = None,
                                   bytes: Option[Natural] = None,
-                                  hash: Option[Hash] = None) {
+                                  hash: Option[Hash] = None,
+                                  license: Option[License] = None) {
 
   def encodingOrDefault: String =
     encoding.getOrElse("UTF-8")
