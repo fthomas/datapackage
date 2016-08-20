@@ -29,6 +29,15 @@ object testUtil {
     Arbitrary(Gen.oneOf(str, obj))
   }
 
+  implicit val arbitrarySource: Arbitrary[Source] = {
+    val gen = for {
+      name <- Arbitrary.arbitrary[Option[String]]
+      web <- Arbitrary.arbitrary[Option[String]]
+      email <- Arbitrary.arbitrary[Option[String]]
+    } yield Source(name, web, email)
+    Arbitrary(gen)
+  }
+
   implicit val arbitraryResourceLocation: Arbitrary[ResourceLocation] = {
     val url = Gen.alphaStr.map(Url.apply)
     val path = Gen.alphaStr.map(Path.apply)
@@ -77,6 +86,7 @@ object testUtil {
       description <- Arbitrary.arbitrary[Option[String]]
       homepage <- Arbitrary.arbitrary[Option[String]]
       version <- Arbitrary.arbitrary[Option[String]]
+      sources <- Arbitrary.arbitrary[Option[List[Source]]]
       keywords <- Arbitrary.arbitrary[Option[List[String]]]
       image <- Arbitrary.arbitrary[Option[String]]
     } yield
@@ -87,6 +97,7 @@ object testUtil {
                  description = description,
                  homepage = homepage,
                  version = version,
+                 sources = sources,
                  keywords = keywords,
                  image = image)
     Arbitrary(gen)

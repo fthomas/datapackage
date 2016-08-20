@@ -6,8 +6,8 @@ import eu.timepit.datapackage.types.NonEmptyString
 import eu.timepit.refined.api.RefType
 import io.circe.{Decoder, DecodingFailure, Encoder, Json}
 
-case class Hash(digest: NonEmptyString,
-                algorithm: Option[NonEmptyString] = None)
+final case class Hash(digest: NonEmptyString,
+                      algorithm: Option[NonEmptyString] = None)
 
 object Hash {
   implicit val decodeHash: Decoder[Hash] =
