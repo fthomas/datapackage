@@ -12,7 +12,7 @@ object License {
   private val keyTpe = "type"
   private val keyUrl = "url"
 
-  implicit val decoderLicense: Decoder[License] =
+  implicit val decodeLicense: Decoder[License] =
     Decoder.instance { c =>
       def str = c.as[String].map(Str.apply)
       def obj =
@@ -23,7 +23,7 @@ object License {
       str.orElse(obj)
     }
 
-  implicit val encoderLicense: Encoder[License] =
+  implicit val encodeLicense: Encoder[License] =
     Encoder.instance {
       case Str(tpe) => tpe.asJson
       case Obj(tpe, url) =>

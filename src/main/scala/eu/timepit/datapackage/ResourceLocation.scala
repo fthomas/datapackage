@@ -12,7 +12,7 @@ object ResourceLocation {
   final case class Path(value: String) extends ResourceLocation
   final case class Data() extends ResourceLocation
 
-  implicit val decoderResourceLocation: Decoder[ResourceLocation] =
+  implicit val decodeResourceLocation: Decoder[ResourceLocation] =
     Decoder.instance { c =>
       def url = c.downField(keyOf[Url]).as[String].map(Url.apply)
       def path = c.downField(keyOf[Path]).as[String].map(Path.apply)
@@ -20,7 +20,7 @@ object ResourceLocation {
       url.orElse(path).orElse(data)
     }
 
-  implicit val encoderResourceLocation: Encoder[ResourceLocation] =
+  implicit val encodeResourceLocation: Encoder[ResourceLocation] =
     Encoder.instance {
       case Url(value) => Json.obj(keyOf[Url] -> value.asJson)
       case Path(value) => Json.obj(keyOf[Path] -> value.asJson)

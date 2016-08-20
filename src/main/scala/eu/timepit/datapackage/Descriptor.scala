@@ -31,7 +31,7 @@ object Descriptor {
   type NameType = String Refined Forall[
     AnyOf[LowerCaseLatinLetter :: Digit :: DotDashUnderscore]]
 
-  implicit val descriptorDecoder: Decoder[Descriptor] = deriveDecoder
+  implicit val decodeDescriptor: Decoder[Descriptor] = deriveDecoder
 
-  implicit val descriptorEncoder: Encoder[Descriptor] = deriveEncoder
+  implicit val encodeDescriptor: Encoder[Descriptor] = deriveEncoder
 }

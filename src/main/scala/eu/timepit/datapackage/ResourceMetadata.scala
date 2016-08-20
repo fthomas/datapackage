@@ -19,9 +19,9 @@ final case class ResourceMetadata(name: Option[String] = None, // TODO: refine!
 }
 
 object ResourceMetadata {
-  implicit val decoderResourceMetadata: Decoder[ResourceMetadata] =
+  implicit val decodeResourceMetadata: Decoder[ResourceMetadata] =
     deriveDecoder
 
-  implicit val encoderResourceMetadata: Encoder[ResourceMetadata] =
+  implicit val encodeResourceMetadata: Encoder[ResourceMetadata] =
     deriveEncoder
 }

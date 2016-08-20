@@ -7,13 +7,13 @@ final case class ResourceInformation(location: ResourceLocation,
                                      metadata: ResourceMetadata)
 
 object ResourceInformation {
-  implicit val resourceInformationDecoder: Decoder[ResourceInformation] =
+  implicit val decodeResourceInformation: Decoder[ResourceInformation] =
     for {
       location <- Decoder[ResourceLocation]
       metadata <- Decoder[ResourceMetadata]
     } yield ResourceInformation(location, metadata)
 
-  implicit val resourceInformationEncoder: Encoder[ResourceInformation] =
+  implicit val encodeResourceInformation: Encoder[ResourceInformation] =
     Encoder.instance { res =>
       res.metadata.asJson.deepMerge(res.location.asJson)
     }
