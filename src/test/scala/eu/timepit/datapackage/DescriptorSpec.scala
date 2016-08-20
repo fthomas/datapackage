@@ -5,5 +5,5 @@ import org.scalacheck.Properties
 
 class DescriptorSpec extends Properties(nameOf[Descriptor]) {
   property("JSON round-trip") = jsonRoundTrip[Descriptor]
-  property("JSON decoding error") = jsonDecodingError[Descriptor]
+  property("JSON decoding error") = jsonDecodeNull[Descriptor]
 }

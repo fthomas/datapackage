@@ -5,5 +5,5 @@ import org.scalacheck.Properties
 
 class ResourceInformationSpec extends Properties(nameOf[ResourceInformation]) {
   property("JSON round-trip") = jsonRoundTrip[ResourceInformation]
-  property("JSON decoding error") = jsonDecodingError[ResourceInformation]
+  property("JSON decoding error") = jsonDecodeNull[ResourceInformation]
 }

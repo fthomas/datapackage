@@ -97,8 +97,12 @@ object testUtil {
       decoded ?= Xor.Right(a)
     }
 
-  def jsonDecodingError[A: Decoder]: Prop = secure {
+  def jsonDecodeNull[A: Decoder]: Prop = secure {
     Decoder[A].decodeJson(Json.Null).isLeft
+  }
+
+  def jsonDecodeEmptyString[A: Decoder]: Prop = secure {
+    Decoder[A].decodeJson(Json.fromString("")).isLeft
   }
 
   def nameOf[T](implicit ct: ClassTag[T]): String =
