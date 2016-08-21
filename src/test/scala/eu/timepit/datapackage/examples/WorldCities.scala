@@ -23,7 +23,8 @@ class WorldCities extends Properties("examples.world-cities") {
                                            mediatype = Some("text/csv")))
 
     val license =
-      License.Obj("ODC-PDDL", "http://opendatacommons.org/licenses/pddl/1.0/")
+      License("ODC-PDDL",
+              Some("http://opendatacommons.org/licenses/pddl/1.0/"))
 
     val sources = List(
       Source(name = Some("Geonames"), web = Some("http://www.geonames.org/")))

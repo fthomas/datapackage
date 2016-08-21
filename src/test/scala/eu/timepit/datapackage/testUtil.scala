@@ -21,12 +21,11 @@ object testUtil {
   }
 
   implicit val arbitraryLicense: Arbitrary[License] = {
-    val str = Gen.alphaStr.map(License.Str.apply)
-    val obj = for {
-      tpe <- Arbitrary.arbitrary[String]
-      url <- Arbitrary.arbitrary[String]
-    } yield License.Obj(tpe, url)
-    Arbitrary(Gen.oneOf(str, obj))
+    val gen = for {
+      name <- Arbitrary.arbitrary[String]
+      url <- Arbitrary.arbitrary[Option[String]]
+    } yield License(name, url)
+    Arbitrary(gen)
   }
 
   implicit val arbitrarySource: Arbitrary[Source] = {

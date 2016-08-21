@@ -3,30 +3,28 @@ package eu.timepit.datapackage
 import io.circe.syntax._
 import io.circe.{Decoder, Encoder, Json}
 
-sealed trait License extends Product with Serializable
+final case class License(name: String, url: Option[String] = None)
 
 object License {
-  final case class Str(tpe: String) extends License
-  final case class Obj(tpe: String, url: String) extends License
-
-  private val keyTpe = "type"
+  private val keyName = "type"
   private val keyUrl = "url"
 
   implicit val decodeLicense: Decoder[License] =
     Decoder.instance { c =>
-      def str = c.as[String].map(Str.apply)
+      def str = c.as[String].map(License(_))
       def obj =
         for {
-          tpe <- c.downField(keyTpe).as[String]
+          name <- c.downField(keyName).as[String]
           url <- c.downField(keyUrl).as[String]
-        } yield Obj(tpe, url)
+        } yield License(name, Some(url))
       str.orElse(obj)
     }
 
   implicit val encodeLicense: Encoder[License] =
     Encoder.instance {
-      case Str(tpe) => tpe.asJson
-      case Obj(tpe, url) =>
-        Json.obj(keyTpe -> tpe.asJson, keyUrl -> url.asJson)
+      case License(name, None) =>
+        name.asJson
+      case License(name, Some(url)) =>
+        Json.obj(keyName -> name.asJson, keyUrl -> url.asJson)
     }
 }
