@@ -11,6 +11,15 @@ import org.scalacheck.{Arbitrary, Gen, Prop}
 import scala.reflect.ClassTag
 
 object testUtil {
+  implicit val arbitraryAuthor: Arbitrary[Author] = {
+    val gen = for {
+      name <- Arbitrary.arbitrary[String]
+      web <- Arbitrary.arbitrary[Option[String]]
+      email <- Arbitrary.arbitrary[Option[String]]
+    } yield Author(name, web, email)
+    Arbitrary(gen)
+  }
+
   implicit val arbitraryHash: Arbitrary[Hash] = {
     val gen = for {
       digest <- Gen.alphaStr.filter(_.nonEmpty)
