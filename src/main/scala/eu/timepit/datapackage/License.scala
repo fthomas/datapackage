@@ -10,15 +10,8 @@ object License {
   private val keyUrl = "url"
 
   implicit val decodeLicense: Decoder[License] =
-    Decoder.instance { c =>
-      def str = c.as[String].map(License(_))
-      def obj =
-        for {
-          name <- c.downField(keyName).as[String]
-          url <- c.downField(keyUrl).as[String]
-        } yield License(name, Some(url))
-      str.orElse(obj)
-    }
+    Decoder.decodeString.map(License(_)) or
+      Decoder.forProduct2(keyName, keyUrl)(License.apply)
 
   implicit val encodeLicense: Encoder[License] =
     Encoder.instance {
