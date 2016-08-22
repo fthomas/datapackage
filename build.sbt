@@ -33,6 +33,7 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-generic" % circeVersion,
   "io.circe" %% "circe-parser" % circeVersion,
   "io.circe" %% "circe-refined" % circeVersion,
+  "ai.x" %% "diff" % "1.2.0" % "test",
   "org.scalacheck" %% "scalacheck" % scalacheckVersion % "test"
 )
 
