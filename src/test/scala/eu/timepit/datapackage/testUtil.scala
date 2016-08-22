@@ -95,6 +95,8 @@ object testUtil {
       homepage <- Arbitrary.arbitrary[Option[String]]
       version <- Arbitrary.arbitrary[Option[String]]
       sources <- Arbitrary.arbitrary[Option[List[Source]]]
+      author <- Arbitrary.arbitrary[Option[Author]]
+      contributors <- Arbitrary.arbitrary[Option[List[Author]]]
       keywords <- Arbitrary.arbitrary[Option[List[String]]]
       image <- Arbitrary.arbitrary[Option[String]]
     } yield
@@ -106,6 +108,8 @@ object testUtil {
                  homepage = homepage,
                  version = version,
                  sources = sources,
+                 author = author,
+                 contributors = contributors,
                  keywords = keywords,
                  image = image)
     Arbitrary(gen)

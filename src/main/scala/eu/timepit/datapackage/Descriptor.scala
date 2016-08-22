@@ -18,9 +18,9 @@ final case class Descriptor(name: NameType,
                             description: Option[String] = None,
                             homepage: Option[String] = None,
                             version: Option[String] = None,
-                            sources: Option[List[Source]] = None, /*
-                            author: Option[Any] = None,
-                            contributors: List[Any] = List.empty */
+                            sources: Option[List[Source]] = None,
+                            author: Option[Author] = None,
+                            contributors: Option[List[Author]] = None,
                             keywords: Option[List[String]] = None,
                             image: Option[String] = None /*
                             dataDependencies: Option[Any] = None,
