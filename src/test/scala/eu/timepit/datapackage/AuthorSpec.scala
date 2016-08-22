@@ -2,6 +2,7 @@ package eu.timepit.datapackage
 
 import cats.data.Xor
 import eu.timepit.datapackage.testUtil._
+import eu.timepit.datapackage.util.nameOf
 import io.circe.{Decoder, Json}
 import org.scalacheck.Prop._
 import org.scalacheck.Properties

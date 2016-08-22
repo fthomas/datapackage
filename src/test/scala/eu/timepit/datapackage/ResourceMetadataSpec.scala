@@ -1,6 +1,7 @@
 package eu.timepit.datapackage
 
 import eu.timepit.datapackage.testUtil._
+import eu.timepit.datapackage.util.nameOf
 import org.scalacheck.Prop._
 import org.scalacheck.Properties
 

@@ -8,7 +8,6 @@ import eu.timepit.refined.scalacheck.numeric._
 import io.circe.{Decoder, Encoder, Json}
 import org.scalacheck.Prop._
 import org.scalacheck.{Arbitrary, Gen, Prop}
-import scala.reflect.ClassTag
 
 object testUtil {
   implicit val arbitraryAuthor: Arbitrary[Author] = {
@@ -125,7 +124,4 @@ object testUtil {
   def jsonDecodeEmptyString[A: Decoder]: Prop = secure {
     Decoder[A].decodeJson(Json.fromString("")).isLeft
   }
-
-  def nameOf[T](implicit ct: ClassTag[T]): String =
-    ct.runtimeClass.getSimpleName
 }
