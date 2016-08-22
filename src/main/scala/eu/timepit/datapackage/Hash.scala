@@ -2,7 +2,6 @@ package eu.timepit.datapackage
 
 import cats.data.Xor
 import eu.timepit.datapackage.types.NonEmptyString
-import eu.timepit.datapackage.util.nameOf
 import eu.timepit.refined.api.RefType
 import eu.timepit.refined.auto._
 import io.circe.{Decoder, Encoder, Json}
@@ -22,7 +21,7 @@ object Hash {
         case algorithm :: digest :: Nil =>
           Xor.Right(Hash(digest, Some(algorithm)))
         case _ =>
-          Xor.Left(s"${nameOf[Hash]}: invalid data: $str")
+          Xor.Left(s"Hash: invalid data: $str")
       }
     }
 
