@@ -1,7 +1,7 @@
 name := "datapackage"
 licenses := Seq("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0"))
 
-scalaVersion := "2.11.8"
+scalaVersion := "2.11.12"
 scalacOptions ++= Seq(
   "-deprecation",
   "-encoding", "UTF-8",
