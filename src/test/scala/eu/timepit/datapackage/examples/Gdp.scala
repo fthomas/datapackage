@@ -1,7 +1,6 @@
 package eu.timepit.datapackage
 package examples
 
-import cats.data.Xor
 import eu.timepit.refined.auto._
 import io.circe.parser
 import org.scalacheck.Prop._
@@ -38,6 +37,6 @@ class Gdp extends Properties("examples.gdp") {
       image =
         Some("http://assets.okfn.org/p/opendatahandbook/img/data-wrench.png"))
 
-    parser.decode[Descriptor](datapackage) ?= Xor.Right(descriptor)
+    parser.decode[Descriptor](datapackage) ?= Right(descriptor)
   }
 }

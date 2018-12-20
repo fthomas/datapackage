@@ -1,5 +1,6 @@
 package eu.timepit.datapackage
 
+import cats.implicits._
 import eu.timepit.datapackage.util.JsonKey
 import eu.timepit.datapackage.util.JsonKey.keyOf
 import io.circe._
@@ -14,9 +15,9 @@ object ResourceLocation {
 
   implicit val decodeResourceLocation: Decoder[ResourceLocation] =
     Decoder.instance { c =>
-      def url = c.downField(keyOf[Url]).as[String].map(Url.apply)
-      def path = c.downField(keyOf[Path]).as[String].map(Path.apply)
-      def data = c.downField(keyOf[Data]).as[Unit].map(_ => Data())
+      def url = c.downField(keyOf[Url]).as[String].right.map(Url.apply)
+      def path = c.downField(keyOf[Path]).as[String].right.map(Path.apply)
+      def data = c.downField(keyOf[Data]).as[Unit].right.map(_ => Data())
       url.orElse(path).orElse(data)
     }
 
