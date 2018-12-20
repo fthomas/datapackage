@@ -1,6 +1,5 @@
 package eu.timepit.datapackage
 
-import cats.data.Xor
 import eu.timepit.datapackage.ResourceLocation.{Data, Path, Url}
 import eu.timepit.datapackage.types.Natural
 import eu.timepit.refined.api.Refined
@@ -8,6 +7,7 @@ import eu.timepit.refined.scalacheck.numeric._
 import io.circe.{Decoder, Encoder, Json}
 import org.scalacheck.Prop._
 import org.scalacheck.{Arbitrary, Gen, Prop}
+
 import scala.reflect.ClassTag
 
 object testUtil {
@@ -119,7 +119,7 @@ object testUtil {
     forAll { (a: A) =>
       val json = Encoder[A].apply(a)
       val decoded = Decoder[A].decodeJson(json)
-      decoded ?= Xor.Right(a)
+      decoded ?= Right(a)
     }
 
   def jsonDecodeNull[A: Decoder]: Prop = secure {

@@ -1,7 +1,6 @@
 package eu.timepit.datapackage
 package examples
 
-import cats.data.Xor
 import eu.timepit.refined.auto._
 import io.circe.parser
 import org.scalacheck.Prop._
@@ -40,6 +39,6 @@ class WorldCities extends Properties("examples.world-cities") {
       sources = Some(sources),
       keywords = Some(List("geodata", "city")))
 
-    parser.decode[Descriptor](datapackage) ?= Xor.Right(descriptor)
+    parser.decode[Descriptor](datapackage) ?= Right(descriptor)
   }
 }
