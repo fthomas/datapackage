@@ -22,7 +22,7 @@ scalacOptions ++= Seq(
 scalacOptions in (Compile, console) -= "-Ywarn-unused-import"
 scalacOptions in (Test, console) -= "-Ywarn-unused-import"
 
-val circeVersion = "0.11.0"
+val circeVersion = "0.11.1"
 val refinedVersion = "0.9.3"
 val scalacheckVersion = "1.14.0"
 
