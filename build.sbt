@@ -27,6 +27,7 @@ val refinedVersion = "0.9.7"
 val scalacheckVersion = "1.14.0"
 
 libraryDependencies ++= Seq(
+  "com.lihaoyi" %% "sourcecode" % "0.1.5",
   "eu.timepit" %% "refined" % refinedVersion,
   "eu.timepit" %% "refined-scalacheck" % refinedVersion,
   "io.circe" %% "circe-core" % circeVersion,
