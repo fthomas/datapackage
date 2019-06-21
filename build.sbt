@@ -50,6 +50,4 @@ initialCommands in Test += """
   import org.scalacheck.Arbitrary
 """
 
-reformatOnCompileSettings
-
 addCommandAlias("validate", ";clean;coverage;test;coverageReport;coverageOff")
