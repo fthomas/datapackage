@@ -1,10 +1,13 @@
 name := "datapackage"
-licenses := Seq("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0"))
+licenses := Seq(
+  "Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0")
+)
 
-scalaVersion := "2.13.0"
+scalaVersion := "2.12.10"
 scalacOptions ++= Seq(
   "-deprecation",
-  "-encoding", "UTF-8",
+  "-encoding",
+  "UTF-8",
   "-feature",
   "-language:existentials",
   "-language:experimental.macros",
@@ -24,7 +27,7 @@ scalacOptions in (Test, console) -= "-Ywarn-unused-import"
 
 val circeVersion = "0.12.1"
 val refinedVersion = "0.9.10"
-val scalacheckVersion = "1.14.0"
+val scalacheckVersion = "1.14.2"
 
 libraryDependencies ++= Seq(
   "eu.timepit" %% "refined" % refinedVersion,
