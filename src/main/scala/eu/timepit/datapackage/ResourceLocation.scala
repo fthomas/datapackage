@@ -23,9 +23,9 @@ object ResourceLocation {
 
   implicit val encodeResourceLocation: Encoder[ResourceLocation] =
     Encoder.instance {
-      case Url(value) => Json.obj(keyOf[Url] -> value.asJson)
+      case Url(value)  => Json.obj(keyOf[Url] -> value.asJson)
       case Path(value) => Json.obj(keyOf[Path] -> value.asJson)
-      case Data() => Json.obj(keyOf[Data] -> Json.Null)
+      case Data()      => Json.obj(keyOf[Data] -> Json.Null)
     }
 
   implicit val jsonKeyUrl: JsonKey[Url] = JsonKey.instance("url")
