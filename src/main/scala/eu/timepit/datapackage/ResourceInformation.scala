@@ -3,8 +3,10 @@ package eu.timepit.datapackage
 import io.circe.syntax._
 import io.circe.{Decoder, Encoder}
 
-final case class ResourceInformation(location: ResourceLocation,
-                                     metadata: ResourceMetadata)
+final case class ResourceInformation(
+    location: ResourceLocation,
+    metadata: ResourceMetadata
+)
 
 object ResourceInformation {
   implicit val decodeResourceInformation: Decoder[ResourceInformation] =
