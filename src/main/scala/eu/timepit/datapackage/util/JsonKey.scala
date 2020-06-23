@@ -5,9 +5,10 @@ trait JsonKey[T] {
 }
 
 object JsonKey {
-  def instance[T](k: String): JsonKey[T] = new JsonKey[T] {
-    override def key: String = k
-  }
+  def instance[T](k: String): JsonKey[T] =
+    new JsonKey[T] {
+      override def key: String = k
+    }
 
   def keyOf[T](implicit jk: JsonKey[T]): String = jk.key
 }
