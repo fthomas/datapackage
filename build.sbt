@@ -26,7 +26,7 @@ scalacOptions in (Compile, console) -= "-Ywarn-unused-import"
 scalacOptions in (Test, console) -= "-Ywarn-unused-import"
 
 val circeVersion = "0.13.0"
-val refinedVersion = "0.9.15"
+val refinedVersion = "0.9.16"
 val scalacheckVersion = "1.14.3"
 
 libraryDependencies ++= Seq(
