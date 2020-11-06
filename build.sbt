@@ -27,7 +27,7 @@ scalacOptions in (Test, console) -= "-Ywarn-unused-import"
 
 val circeVersion = "0.13.0"
 val refinedVersion = "0.9.17"
-val scalacheckVersion = "1.15.0"
+val scalacheckVersion = "1.15.1"
 
 libraryDependencies ++= Seq(
   "eu.timepit" %% "refined" % refinedVersion,
